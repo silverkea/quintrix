@@ -712,6 +712,7 @@ export default function App() {
         onRight={() => movePiece(1, 0)}
         onDown={() => movePiece(0, 1)}
         onRotate={() => rotateCurrentPiece(true)}
+        onHold={holdPiece}
         disabled={!gameState.isPlaying || gameState.gameOver}
       />
 
@@ -897,12 +898,14 @@ function MobileControls({
   onRight,
   onDown,
   onRotate,
+  onHold,
   disabled,
 }: {
   onLeft: () => void;
   onRight: () => void;
   onDown: () => void;
   onRotate: () => void;
+  onHold: () => void;
   disabled: boolean;
 }) {
   return (
@@ -928,6 +931,15 @@ function MobileControls({
         <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
+      </button>
+      <button
+        onPointerDown={(e) => { e.preventDefault(); onHold(); }}
+        disabled={disabled}
+        style={{ touchAction: 'none', WebkitTapHighlightColor: 'transparent' }}
+        className="w-16 h-16 glass-panel-violet rounded-xl flex items-center justify-center text-white/80 active:scale-90 transition-transform disabled:opacity-50 disabled:pointer-events-none cursor-pointer touch-manipulation"
+        aria-label="Hold"
+      >
+        <span className="text-lg font-bold">H</span>
       </button>
       <button
         onPointerDown={(e) => { e.preventDefault(); onDown(); }}

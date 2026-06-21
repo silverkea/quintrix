@@ -379,7 +379,7 @@ export default function App() {
       return;
     }
 
-    if (event.key === 'h' || event.key === 'H') {
+    if (event.key === '?' || (event.key === '/' && event.shiftKey)) {
       setShowHelp(prev => !prev);
       if (!gameState.paused && gameState.isPlaying) {
         setGameState(prev => ({ ...prev, paused: true }));
@@ -418,9 +418,8 @@ export default function App() {
         event.preventDefault();
         hardDrop();
         break;
-      case 'c':
-      case 'C':
-      case 'Shift':
+      case 'h':
+      case 'H':
         event.preventDefault();
         holdPiece();
         break;
@@ -659,7 +658,7 @@ export default function App() {
               <div className="hidden sm:flex items-center justify-center gap-2 text-[10px] lg:text-xs">
                 <span className="text-white/40 uppercase tracking-wider">Press</span>
                 <kbd className="px-1.5 py-0.5 lg:px-2 lg:py-1 rounded bg-white/10 border border-white/20 text-neon-cyan font-mono glow-text animate-pulse">
-                  H
+                  ?
                 </kbd>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-magenta font-bold uppercase tracking-wider">
                   for Help
@@ -764,7 +763,7 @@ export default function App() {
                   <div className="text-white/60">Hard Drop</div>
                   <div className="text-white text-right">Space</div>
                   <div className="text-white/60">Hold Piece</div>
-                  <div className="text-white text-right">Shift / C</div>
+                  <div className="text-white text-right">H</div>
                 </div>
               </div>
               
@@ -774,7 +773,7 @@ export default function App() {
                   <div className="text-white/60">Pause</div>
                   <div className="text-white text-right">P / Esc</div>
                   <div className="text-white/60">Toggle Help</div>
-                  <div className="text-white text-right">H</div>
+                  <div className="text-white text-right">?</div>
                   <div className="text-white/60">Start</div>
                   <div className="text-white text-right">Enter</div>
                 </div>

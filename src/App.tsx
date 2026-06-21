@@ -543,6 +543,20 @@ export default function App() {
             </div>
           </div>
 
+          {/* Mobile next pieces at top */}
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-2 w-full">
+            {gameState.nextPieces.slice(0, 3).map((type, index) => (
+              <div key={index} className="flex items-center gap-1">
+                <span className={`text-xs font-mono ${index === 0 ? 'text-neon-magenta font-bold' : 'text-white/40'}`}>
+                  {index + 1}
+                </span>
+                <div className={`w-5 h-7 flex items-center justify-center ${index === 0 ? 'opacity-100' : 'opacity-50'}`}>
+                  <MiniPiecePreview type={type} size="small" />
+                </div>
+              </div>
+            ))}
+          </div>
+
           <GameGrid
             grid={gameState.grid}
             currentPiece={gameState.currentPiece}
@@ -661,22 +675,10 @@ export default function App() {
         </div>
       </div>
 
-      {/* Mobile horizontal next pieces */}
-      <div className="lg:hidden flex items-center justify-center gap-3 mb-2 w-full px-2">
-        {gameState.nextPieces.slice(0, 3).map((type, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <span className={`text-xs font-mono ${index === 0 ? 'text-neon-magenta font-bold' : 'text-white/40'}`}>
-              {index + 1}
-            </span>
-            <div className={`w-6 h-8 flex items-center justify-center ${index === 0 ? 'opacity-100' : 'opacity-50'}`}>
-              <MiniPiecePreview type={type} size="small" />
-            </div>
-          </div>
-        ))}
-      </div>
+
 
       {/* Mobile stats bar - one line */}
-      <div className="lg:hidden flex items-center justify-center gap-4 mb-20 sm:mb-24 w-full px-2 pb-1">
+      <div className="lg:hidden flex items-center justify-center gap-4 mb-40 sm:mb-44 w-full px-2 pb-2">
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-white/60 uppercase tracking-wider">Score</span>
           <span className="text-neon-cyan text-sm font-bold glow-text font-mono">

@@ -29,15 +29,16 @@ export function createPiece(type: QuintrixType): Piece {
 }
 
 export function rotatePiece(piece: Piece, clockwise: boolean = true): Piece {
-  const n = piece.shape.length;
-  const rotated: number[][] = Array.from({ length: n }, () => Array(n).fill(0));
+  const rows = piece.shape.length;
+  const cols = piece.shape[0].length;
+  const rotated: number[][] = Array.from({ length: cols }, () => Array(rows).fill(0));
 
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
       if (clockwise) {
-        rotated[j][n - 1 - i] = piece.shape[i][j];
+        rotated[j][rows - 1 - i] = piece.shape[i][j];
       } else {
-        rotated[n - 1 - j][i] = piece.shape[i][j];
+        rotated[cols - 1 - j][i] = piece.shape[i][j];
       }
     }
   }

@@ -516,9 +516,9 @@ export default function App() {
       >
 
 
-        <div className="glass-panel glass-panel-cyan glass-panel rounded-2xl lg:rounded-3xl p-3 lg:p-6 relative flex flex-col items-center">
+        <div className="glass-panel glass-panel-cyan glass-panel rounded-2xl lg:rounded-3xl p-2 lg:p-6 relative flex flex-col items-center">
           {/* Piece queue + hold */}
-          <div className="flex items-center justify-center gap-2 mb-2 w-full">
+          <div className="flex items-center justify-center gap-2 mb-1 w-full">
             {gameState.nextPieces.slice(0, 3).map((type, index) => (
               <div key={index} className="flex items-center gap-1">
                 <span className={`text-xs font-mono ${index === 0 ? 'text-neon-magenta font-bold' : 'text-white/40'}`}>
@@ -673,7 +673,7 @@ export default function App() {
 
 
       {/* Mobile stats bar - one line */}
-      <div className="lg:hidden flex items-center justify-center gap-4 mb-40 sm:mb-44 w-full px-2 pb-2">
+      <div className="lg:hidden flex items-center justify-center gap-4 mb-16 sm:mb-20 w-full px-2 pb-2 shrink-0">
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-white/60 uppercase tracking-wider">Score</span>
           <span className="text-neon-cyan text-sm font-bold glow-text font-mono">
@@ -839,7 +839,7 @@ function GameGrid({
         gridTemplateColumns: `repeat(${GRID_WIDTH}, 1fr)`,
         gridTemplateRows: `repeat(${GRID_HEIGHT}, 1fr)`,
         width: 'min(90vw, 350px)',
-        height: 'min(min(90vw, 350px) * 2, min(100vh - 12rem, 700px))',
+        height: 'min(min(90vw, 350px) * 2, min(100vh - 18rem, 700px))',
       }}
     >
       {combinedGrid.map((row, y) =>

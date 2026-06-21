@@ -578,10 +578,9 @@ export default function App() {
 
           {!gameState.isPlaying && !gameState.gameOver && (
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl z-20">
-              <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-magenta glow-text mb-2">
-                TETRIS
+              <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-magenta glow-text mb-6">
+                TETRA
               </h1>
-              <p className="text-sm text-white/60 mb-6 tracking-widest">HOLO-SYNTH EDITION</p>
               <button
                 onClick={startGame}
                 className="px-8 py-3 glass-panel-cyan rounded-xl text-white font-bold hover:scale-105 transition-transform border-2 border-neon-cyan/30"

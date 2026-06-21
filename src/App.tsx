@@ -939,7 +939,9 @@ function MobileControls({
         className="w-16 h-16 glass-panel-violet rounded-xl flex items-center justify-center text-white/80 active:scale-90 transition-transform disabled:opacity-50 disabled:pointer-events-none cursor-pointer touch-manipulation"
         aria-label="Hold"
       >
-        <span className="text-lg font-bold">H</span>
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+        </svg>
       </button>
       <button
         onPointerDown={(e) => { e.preventDefault(); onDown(); }}

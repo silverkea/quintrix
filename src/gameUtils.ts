@@ -1,10 +1,10 @@
 import {
   Piece,
   Position,
-  PENTOMINO_SHAPES,
-  PENTOMINO_COLORS,
-  PENTOMINO_TYPES,
-  PentominoType,
+  QUINTRIX_SHAPES,
+  QUINTRIX_COLORS,
+  QUINTRIX_TYPES,
+  QuintrixType,
   GRID_WIDTH,
   GRID_HEIGHT,
 } from './types';
@@ -14,16 +14,16 @@ export function createEmptyGrid(): (string | null)[][] {
 }
 
 export function getRandomPiece(): Piece {
-  const type = PENTOMINO_TYPES[Math.floor(Math.random() * PENTOMINO_TYPES.length)];
+  const type = QUINTRIX_TYPES[Math.floor(Math.random() * QUINTRIX_TYPES.length)];
   return createPiece(type);
 }
 
-export function createPiece(type: PentominoType): Piece {
+export function createPiece(type: QuintrixType): Piece {
   return {
     type,
-    shape: PENTOMINO_SHAPES[type].map(row => [...row]),
-    color: PENTOMINO_COLORS[type],
-    position: { x: Math.floor((GRID_WIDTH - PENTOMINO_SHAPES[type][0].length) / 2), y: 0 },
+    shape: QUINTRIX_SHAPES[type].map(row => [...row]),
+    color: QUINTRIX_COLORS[type],
+    position: { x: Math.floor((GRID_WIDTH - QUINTRIX_SHAPES[type][0].length) / 2), y: 0 },
     rotation: 0,
   };
 }
@@ -142,8 +142,8 @@ export function checkCollision(piece: Piece, grid: (string | null)[][]): boolean
   return !isValidPosition(piece, grid, piece.position);
 }
 
-export function getNextPiece(queue: PentominoType[], count: number = 6): PentominoType[] {
-  const shuffled = [...PENTOMINO_TYPES].sort(() => Math.random() - 0.5);
+export function getNextPiece(queue: QuintrixType[], count: number = 6): QuintrixType[] {
+  const shuffled = [...QUINTRIX_TYPES].sort(() => Math.random() - 0.5);
   return [...queue.slice(count), ...shuffled];
 }
 
@@ -224,8 +224,8 @@ export function isGameOver(piece: Piece, grid: (string | null)[][]): boolean {
   return !isValidPosition(piece, grid, piece.position);
 }
 
-export function getBagRandomizer(): PentominoType[] {
-  const bag = [...PENTOMINO_TYPES];
+export function getBagRandomizer(): QuintrixType[] {
+  const bag = [...QUINTRIX_TYPES];
   for (let i = bag.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [bag[i], bag[j]] = [bag[j], bag[i]];

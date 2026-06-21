@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   GameState,
   Piece,
-  PentominoType,
-  PENTOMINO_SHAPES,
-  PENTOMINO_COLORS,
+  QuintrixType,
+  QUINTRIX_SHAPES,
+  QUINTRIX_COLORS,
   GRID_WIDTH,
   GRID_HEIGHT,
   Particle,
@@ -120,7 +120,7 @@ export default function App() {
           );
 
           if (linesCleared.length >= 5) {
-            soundEngine.playTetra();
+            soundEngine.playQuintrix();
           } else {
             soundEngine.playLineClear();
           }
@@ -234,7 +234,7 @@ export default function App() {
         );
 
         if (linesCleared.length >= 5) {
-          soundEngine.playTetra();
+          soundEngine.playQuintrix();
         } else {
           soundEngine.playLineClear();
         }
@@ -573,7 +573,7 @@ export default function App() {
           {!gameState.isPlaying && !gameState.gameOver && (
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl z-20">
               <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-magenta glow-text mb-6">
-                PENTOMINO
+                QUINTRIX
               </h1>
               <button
                 onClick={startGame}
@@ -865,9 +865,9 @@ function GameGrid({
   );
 }
 
-function MiniPiecePreview({ type, size = 'normal' }: { type: PentominoType; size?: 'normal' | 'small' }) {
-  const shape = PENTOMINO_SHAPES[type];
-  const color = PENTOMINO_COLORS[type];
+function MiniPiecePreview({ type, size = 'normal' }: { type: QuintrixType; size?: 'normal' | 'small' }) {
+  const shape = QUINTRIX_SHAPES[type];
+  const color = QUINTRIX_COLORS[type];
   const blockSize = size === 'normal' ? 'w-3 h-3 lg:w-4 lg:h-4' : 'w-2 h-2 lg:w-3 lg:h-3';
   const gap = size === 'normal' ? 'gap-px' : 'gap-0.5';
 

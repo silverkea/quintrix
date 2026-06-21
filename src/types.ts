@@ -1,7 +1,7 @@
-export type PentominoType = 'F' | 'I' | 'L' | 'N' | 'P' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+export type QuintrixType = 'F' | 'I' | 'L' | 'N' | 'P' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
 
-export interface PentominoShape {
-  type: PentominoType;
+export interface QuintrixShape {
+  type: QuintrixType;
   shape: number[][];
   color: string;
 }
@@ -12,7 +12,7 @@ export interface Position {
 }
 
 export interface Piece {
-  type: PentominoType;
+  type: QuintrixType;
   shape: number[][];
   color: string;
   position: Position;
@@ -23,9 +23,9 @@ export interface GameState {
   grid: (string | null)[][];
   currentPiece: Piece | null;
   ghostPiece: Piece | null;
-  heldPiece: PentominoType | null;
+  heldPiece: QuintrixType | null;
   canHold: boolean;
-  nextPieces: PentominoType[];
+  nextPieces: QuintrixType[];
   score: number;
   level: number;
   lines: number;
@@ -45,7 +45,7 @@ export interface SoundType {
   drop: string;
   hardDrop: string;
   lineClear: string;
-  tetra: string;
+  quintrix: string;
   hold: string;
   gameOver: string;
 }
@@ -69,7 +69,7 @@ export interface FloatingText {
   life: number;
 }
 
-export const PENTOMINO_SHAPES: Record<PentominoType, number[][]> = {
+export const QUINTRIX_SHAPES: Record<QuintrixType, number[][]> = {
   F: [
     [0, 1, 1],
     [1, 1, 0],
@@ -134,7 +134,7 @@ export const PENTOMINO_SHAPES: Record<PentominoType, number[][]> = {
   ],
 };
 
-export const PENTOMINO_COLORS: Record<PentominoType, string> = {
+export const QUINTRIX_COLORS: Record<QuintrixType, string> = {
   F: '#7c3aed',
   I: '#00f5ff',
   L: '#ff9800',
@@ -179,4 +179,4 @@ export const LEVEL_SPEEDS: Record<number, number> = {
   15: 10,
 };
 
-export const PENTOMINO_TYPES: PentominoType[] = ['F', 'I', 'L', 'N', 'P', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+export const QUINTRIX_TYPES: QuintrixType[] = ['F', 'I', 'L', 'N', 'P', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];

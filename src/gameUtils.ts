@@ -1,10 +1,10 @@
 import {
   Piece,
   Position,
-  TETROMINO_SHAPES,
-  TETROMINO_COLORS,
-  TETROMINO_TYPES,
-  TetrominoType,
+  PENTOMINO_SHAPES,
+  PENTOMINO_COLORS,
+  PENTOMINO_TYPES,
+  PentominoType,
   GRID_WIDTH,
   GRID_HEIGHT,
 } from './types';
@@ -14,16 +14,16 @@ export function createEmptyGrid(): (string | null)[][] {
 }
 
 export function getRandomPiece(): Piece {
-  const type = TETROMINO_TYPES[Math.floor(Math.random() * TETROMINO_TYPES.length)];
+  const type = PENTOMINO_TYPES[Math.floor(Math.random() * PENTOMINO_TYPES.length)];
   return createPiece(type);
 }
 
-export function createPiece(type: TetrominoType): Piece {
+export function createPiece(type: PentominoType): Piece {
   return {
     type,
-    shape: TETROMINO_SHAPES[type].map(row => [...row]),
-    color: TETROMINO_COLORS[type],
-    position: { x: Math.floor((GRID_WIDTH - TETROMINO_SHAPES[type][0].length) / 2), y: 0 },
+    shape: PENTOMINO_SHAPES[type].map(row => [...row]),
+    color: PENTOMINO_COLORS[type],
+    position: { x: Math.floor((GRID_WIDTH - PENTOMINO_SHAPES[type][0].length) / 2), y: 0 },
     rotation: 0,
   };
 }
@@ -142,8 +142,8 @@ export function checkCollision(piece: Piece, grid: (string | null)[][]): boolean
   return !isValidPosition(piece, grid, piece.position);
 }
 
-export function getNextPiece(queue: TetrominoType[], count: number = 7): TetrominoType[] {
-  const shuffled = [...TETROMINO_TYPES].sort(() => Math.random() - 0.5);
+export function getNextPiece(queue: PentominoType[], count: number = 6): PentominoType[] {
+  const shuffled = [...PENTOMINO_TYPES].sort(() => Math.random() - 0.5);
   return [...queue.slice(count), ...shuffled];
 }
 
@@ -151,8 +151,7 @@ export function calculateScore(
   linesClearedCount: number,
   level: number,
   combo: number,
-  backToBack: boolean,
-  tSpin: boolean
+  backToBack: boolean
 ): { score: number; combo: number; backToBack: boolean; type: string } {
   let score = 0;
   let type = '';
@@ -165,23 +164,21 @@ export function calculateScore(
     1: 100,
     2: 300,
     3: 500,
-    4: 800,
+    4: 750,
+    5: 1000,
   };
 
   score = (baseScores[linesClearedCount] || 0) * level;
 
-  if (tSpin) {
-    score = 1200 * level;
-    type = 'T-SPIN';
-  } else if (linesClearedCount === 4) {
+  if (linesClearedCount >= 5) {
     if (backToBack) {
       score = Math.floor(score * 1.5);
     }
     backToBack = true;
-    type = 'TETRA';
+    type = 'PENTA';
   } else {
     backToBack = false;
-    type = linesClearedCount === 1 ? 'SINGLE' : linesClearedCount === 2 ? 'DOUBLE' : 'TRIPLE';
+    type = linesClearedCount === 1 ? 'SINGLE' : linesClearedCount === 2 ? 'DOUBLE' : linesClearedCount === 3 ? 'TRIPLE' : 'QUAD';
   }
 
   if (combo > 0) {
@@ -227,8 +224,8 @@ export function isGameOver(piece: Piece, grid: (string | null)[][]): boolean {
   return !isValidPosition(piece, grid, piece.position);
 }
 
-export function getBagRandomizer(): TetrominoType[] {
-  const bag = [...TETROMINO_TYPES];
+export function getBagRandomizer(): PentominoType[] {
+  const bag = [...PENTOMINO_TYPES];
   for (let i = bag.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [bag[i], bag[j]] = [bag[j], bag[i]];

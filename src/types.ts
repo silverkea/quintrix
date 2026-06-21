@@ -1,7 +1,7 @@
-export type TetrominoType = 'I' | 'O' | 'T' | 'S' | 'Z' | 'J' | 'L';
+export type PentominoType = 'F' | 'I' | 'L' | 'N' | 'P' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
 
-export interface TetrominoShape {
-  type: TetrominoType;
+export interface PentominoShape {
+  type: PentominoType;
   shape: number[][];
   color: string;
 }
@@ -12,7 +12,7 @@ export interface Position {
 }
 
 export interface Piece {
-  type: TetrominoType;
+  type: PentominoType;
   shape: number[][];
   color: string;
   position: Position;
@@ -23,9 +23,9 @@ export interface GameState {
   grid: (string | null)[][];
   currentPiece: Piece | null;
   ghostPiece: Piece | null;
-  heldPiece: TetrominoType | null;
+  heldPiece: PentominoType | null;
   canHold: boolean;
-  nextPieces: TetrominoType[];
+  nextPieces: PentominoType[];
   score: number;
   level: number;
   lines: number;
@@ -36,7 +36,6 @@ export interface GameState {
   dropInterval: number;
   lastDrop: number;
   backToBack: boolean;
-  tSpin: boolean;
   pendingLines: number;
 }
 
@@ -70,63 +69,94 @@ export interface FloatingText {
   life: number;
 }
 
-export const TETROMINO_SHAPES: Record<TetrominoType, number[][]> = {
-  I: [
-    [0, 0, 0, 0],
-    [1, 1, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  O: [
-    [1, 1],
-    [1, 1],
-  ],
-  T: [
+export const PENTOMINO_SHAPES: Record<PentominoType, number[][]> = {
+  F: [
+    [0, 1, 1],
+    [1, 1, 0],
     [0, 1, 0],
-    [1, 1, 1],
-    [0, 0, 0],
   ],
-  S: [
-    [0, 1, 1],
-    [1, 1, 0],
-    [0, 0, 0],
-  ],
-  Z: [
-    [1, 1, 0],
-    [0, 1, 1],
-    [0, 0, 0],
-  ],
-  J: [
-    [1, 0, 0],
-    [1, 1, 1],
-    [0, 0, 0],
+  I: [
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0],
   ],
   L: [
-    [0, 0, 1],
+    [1, 0, 0],
+    [1, 0, 0],
     [1, 1, 1],
-    [0, 0, 0],
+  ],
+  N: [
+    [0, 1, 1],
+    [1, 1, 0],
+    [0, 1, 0],
+  ],
+  P: [
+    [1, 1],
+    [1, 1],
+    [1, 0],
+  ],
+  T: [
+    [1, 1, 1],
+    [0, 1, 0],
+    [0, 1, 0],
+  ],
+  U: [
+    [1, 0, 1],
+    [1, 1, 1],
+  ],
+  V: [
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 1, 1],
+  ],
+  W: [
+    [0, 0, 1],
+    [0, 1, 1],
+    [1, 1, 0],
+  ],
+  X: [
+    [0, 1, 0],
+    [1, 1, 1],
+    [0, 1, 0],
+  ],
+  Y: [
+    [0, 1],
+    [1, 1],
+    [0, 1],
+    [0, 1],
+  ],
+  Z: [
+    [1, 1, 1],
+    [0, 0, 1],
+    [0, 0, 1],
   ],
 };
 
-export const TETROMINO_COLORS: Record<TetrominoType, string> = {
+export const PENTOMINO_COLORS: Record<PentominoType, string> = {
+  F: '#7c3aed',
   I: '#00f5ff',
-  O: '#ffeb3b',
-  T: '#9c27b0',
-  S: '#4caf50',
-  Z: '#f44336',
-  J: '#2196f3',
   L: '#ff9800',
+  N: '#4ade80',
+  P: '#f97316',
+  T: '#ec4899',
+  U: '#a855f7',
+  V: '#22d3ee',
+  W: '#facc15',
+  X: '#f43f5e',
+  Y: '#8b5cf6',
+  Z: '#10b981',
 };
 
-export const GRID_WIDTH = 10;
-export const GRID_HEIGHT = 20;
+export const GRID_WIDTH = 14;
+export const GRID_HEIGHT = 24;
 
 export const SCORING = {
   SINGLE: 100,
   DOUBLE: 300,
   TRIPLE: 500,
-  TETRA: 800,
-  T_SPIN: 1200,
+  PENTA: 1000,
   SOFT_DROP: 1,
   HARD_DROP: 2,
 };
@@ -149,4 +179,4 @@ export const LEVEL_SPEEDS: Record<number, number> = {
   15: 10,
 };
 
-export const TETROMINO_TYPES: TetrominoType[] = ['I', 'O', 'T', 'S', 'Z', 'J', 'L'];
+export const PENTOMINO_TYPES: PentominoType[] = ['F', 'I', 'L', 'N', 'P', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   GameState,
   Piece,
-  TetrominoType,
-  TETROMINO_SHAPES,
-  TETROMINO_COLORS,
+  PentominoType,
+  PENTOMINO_SHAPES,
+  PENTOMINO_COLORS,
   GRID_WIDTH,
   GRID_HEIGHT,
   Particle,
@@ -45,7 +45,6 @@ export default function App() {
     dropInterval: 1000,
     lastDrop: 0,
     backToBack: false,
-    tSpin: false,
     pendingLines: 0,
   }));
 
@@ -64,7 +63,7 @@ export default function App() {
     const newPiece = createPiece(nextType);
     const newNextPieces = gameState.nextPieces.slice(1);
     
-    if (newNextPieces.length < 7) {
+    if (newNextPieces.length < 6) {
       newNextPieces.push(...getBagRandomizer());
     }
 
@@ -117,11 +116,10 @@ export default function App() {
             linesCleared.length,
             prev.level,
             prev.combo,
-            prev.backToBack,
-            prev.tSpin
+            prev.backToBack
           );
 
-          if (linesCleared.length === 4) {
+          if (linesCleared.length >= 5) {
             soundEngine.playTetra();
           } else {
             soundEngine.playLineClear();
@@ -157,7 +155,7 @@ export default function App() {
               x: 0.5,
               y: linesCleared.reduce((a, b) => (a + b) / linesCleared.length, 0) / GRID_HEIGHT,
               text: `${type} +${score}`,
-              color: linesCleared.length === 4 ? '#ff00ff' : '#00f5ff',
+              color: linesCleared.length >= 5 ? '#ff00ff' : '#00f5ff',
               life: 1,
             },
           ]);
@@ -168,7 +166,6 @@ export default function App() {
           newState.lines += linesCleared.length;
           newState.level = getLevelForLines(newState.lines);
           newState.dropInterval = getDropInterval(newState.level);
-          newState.tSpin = false;
         }
 
         const spawnState = spawnNewPiece();
@@ -233,11 +230,10 @@ export default function App() {
           linesCleared.length,
           prev.level,
           prev.combo,
-          prev.backToBack,
-          prev.tSpin
+          prev.backToBack
         );
 
-        if (linesCleared.length === 4) {
+        if (linesCleared.length >= 5) {
           soundEngine.playTetra();
         } else {
           soundEngine.playLineClear();
@@ -273,7 +269,7 @@ export default function App() {
             x: 0.5,
             y: linesCleared.reduce((a, b) => (a + b) / linesCleared.length, 0) / GRID_HEIGHT,
             text: `${type} +${score}`,
-            color: linesCleared.length === 4 ? '#ff00ff' : '#00f5ff',
+            color: linesCleared.length >= 5 ? '#ff00ff' : '#00f5ff',
             life: 1,
           },
         ]);
@@ -284,7 +280,6 @@ export default function App() {
         newState.lines += linesCleared.length;
         newState.level = getLevelForLines(newState.lines);
         newState.dropInterval = getDropInterval(newState.level);
-        newState.tSpin = false;
       }
 
       const spawnState = spawnNewPiece();
@@ -349,7 +344,6 @@ export default function App() {
       dropInterval: 1000,
       lastDrop: performance.now(),
       backToBack: false,
-      tSpin: false,
       pendingLines: 0,
     });
     setParticles([]);
@@ -579,7 +573,7 @@ export default function App() {
           {!gameState.isPlaying && !gameState.gameOver && (
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl z-20">
               <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-magenta glow-text mb-6">
-                TETRA
+                PENTOMINO
               </h1>
               <button
                 onClick={startGame}
@@ -871,9 +865,9 @@ function GameGrid({
   );
 }
 
-function MiniPiecePreview({ type, size = 'normal' }: { type: TetrominoType; size?: 'normal' | 'small' }) {
-  const shape = TETROMINO_SHAPES[type];
-  const color = TETROMINO_COLORS[type];
+function MiniPiecePreview({ type, size = 'normal' }: { type: PentominoType; size?: 'normal' | 'small' }) {
+  const shape = PENTOMINO_SHAPES[type];
+  const color = PENTOMINO_COLORS[type];
   const blockSize = size === 'normal' ? 'w-3 h-3 lg:w-4 lg:h-4' : 'w-2 h-2 lg:w-3 lg:h-3';
   const gap = size === 'normal' ? 'gap-px' : 'gap-0.5';
 

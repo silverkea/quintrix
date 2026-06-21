@@ -514,37 +514,11 @@ export default function App() {
         ref={containerRef}
         className={`relative flex flex-col items-center gap-3 lg:flex-row lg:gap-4 z-10 transition-transform ${shake ? 'animate-shake' : ''}`}
       >
-        <div className="hidden lg:flex glass-panel-violet glass-panel rounded-xl p-3 lg:p-4 flex-col items-center gap-3 lg:gap-4">
-          <h2 className="text-neon-cyan text-xs lg:text-sm font-bold uppercase tracking-wider glow-text">Hold</h2>
-          <div className="w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center">
-            {gameState.heldPiece ? (
-              <MiniPiecePreview type={gameState.heldPiece} />
-            ) : (
-              <div className="w-12 h-12 lg:w-16 lg:h-16 border-2 border-white/10 border-dashed rounded-lg" />
-            )}
-          </div>
-          <div className={`text-xs lg:text-xs text-white/60 ${!gameState.canHold ? 'opacity-50' : ''}`}>
-            Shift/C
-          </div>
-        </div>
+
 
         <div className="glass-panel glass-panel-cyan glass-panel rounded-2xl lg:rounded-3xl p-3 lg:p-6 relative flex flex-col items-center">
-          {/* Mobile hold piece at top */}
-          <div className="lg:hidden flex items-center gap-2 mb-2">
-            <div className="glass-panel-violet rounded-lg p-2 flex items-center gap-2">
-              <span className="text-neon-cyan text-[10px] font-bold uppercase tracking-wider mr-1">H</span>
-              <div className="w-10 h-10 flex items-center justify-center">
-                {gameState.heldPiece ? (
-                  <MiniPiecePreview type={gameState.heldPiece} />
-                ) : (
-                  <div className="w-8 h-8 border-2 border-white/10 border-dashed rounded" />
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile next pieces at top */}
-          <div className="lg:hidden flex items-center justify-center gap-2 mb-2 w-full">
+          {/* Piece queue + hold */}
+          <div className="flex items-center justify-center gap-2 mb-2 w-full">
             {gameState.nextPieces.slice(0, 3).map((type, index) => (
               <div key={index} className="flex items-center gap-1">
                 <span className={`text-xs font-mono ${index === 0 ? 'text-neon-magenta font-bold' : 'text-white/40'}`}>
@@ -555,6 +529,16 @@ export default function App() {
                 </div>
               </div>
             ))}
+            <div className={`flex items-center gap-1 ${!gameState.canHold ? 'opacity-50' : ''}`}>
+              <span className="text-xs font-mono text-neon-cyan font-bold">H</span>
+              <div className="w-5 h-7 flex items-center justify-center">
+                {gameState.heldPiece ? (
+                  <MiniPiecePreview type={gameState.heldPiece} size="small" />
+                ) : (
+                  <div className="w-4 h-6 border-2 border-white/10 border-dashed rounded" />
+                )}
+              </div>
+            </div>
           </div>
 
           <GameGrid
@@ -617,7 +601,7 @@ export default function App() {
         {/* Desktop right panel */}
         <div className="hidden lg:flex glass-panel-magenta glass-panel rounded-xl lg:rounded-2xl p-3 lg:p-4 flex-col gap-3 lg:gap-4 min-w-[120px] lg:min-w-[160px]">
           <div className="text-center mb-1 lg:mb-2">
-            <h2 className="text-neon-magenta text-xs lg:text-sm font-bold uppercase tracking-wider glow-text">Next</h2>
+            <h2 className="text-neon-magenta text-xs lg:text-sm font-bold uppercase tracking-wider glow-text">Next & Hold</h2>
           </div>
           
           {gameState.nextPieces.slice(0, 3).map((type, index) => (
@@ -628,6 +612,17 @@ export default function App() {
               <MiniPiecePreview type={type} size={index === 0 ? 'normal' : 'small'} />
             </div>
           ))}
+
+          <div className={`flex items-center gap-3 ${!gameState.canHold ? 'opacity-50' : ''}`}>
+            <div className="w-6 h-8 flex items-center">
+              <span className="text-neon-cyan font-bold">H</span>
+            </div>
+            {gameState.heldPiece ? (
+              <MiniPiecePreview type={gameState.heldPiece} size="small" />
+            ) : (
+              <div className="w-10 h-10 border-2 border-white/10 border-dashed rounded-lg" />
+            )}
+          </div>
 
           <div className="border-t border-white/10 pt-3 lg:pt-4 space-y-2 lg:space-y-3">
             <div className="text-center">

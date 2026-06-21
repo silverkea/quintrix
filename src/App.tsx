@@ -570,7 +570,8 @@ export default function App() {
                 onClick={startGame}
                 className="px-8 py-3 glass-panel-cyan rounded-xl text-white font-bold hover:scale-105 transition-transform border-2 border-neon-cyan/30"
               >
-                Play Again (Enter)
+                Play Again{' '}
+                <span className="hidden lg:inline">(Enter)</span>
               </button>
             </div>
           )}

@@ -46,7 +46,7 @@ export interface SoundType {
   drop: string;
   hardDrop: string;
   lineClear: string;
-  tetris: string;
+  tetra: string;
   hold: string;
   gameOver: string;
 }
@@ -125,7 +125,7 @@ export const SCORING = {
   SINGLE: 100,
   DOUBLE: 300,
   TRIPLE: 500,
-  TETRIS: 800,
+  TETRA: 800,
   T_SPIN: 1200,
   SOFT_DROP: 1,
   HARD_DROP: 2,

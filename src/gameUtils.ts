@@ -178,7 +178,7 @@ export function calculateScore(
       score = Math.floor(score * 1.5);
     }
     backToBack = true;
-    type = 'TETRIS';
+    type = 'TETRA';
   } else {
     backToBack = false;
     type = linesClearedCount === 1 ? 'SINGLE' : linesClearedCount === 2 ? 'DOUBLE' : 'TRIPLE';

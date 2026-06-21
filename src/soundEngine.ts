@@ -59,7 +59,7 @@ export class SoundEngine {
     });
   }
 
-  public playTetris(): void {
+  public playTetra(): void {
     if (!this.audioContext || this.isMuted) return;
     const melody = [523.25, 659.25, 783.99, 1046.50, 1318.51];
     melody.forEach((freq, i) => {

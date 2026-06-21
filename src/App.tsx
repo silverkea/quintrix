@@ -122,7 +122,7 @@ export default function App() {
           );
 
           if (linesCleared.length === 4) {
-            soundEngine.playTetris();
+            soundEngine.playTetra();
           } else {
             soundEngine.playLineClear();
           }
@@ -238,7 +238,7 @@ export default function App() {
         );
 
         if (linesCleared.length === 4) {
-          soundEngine.playTetris();
+          soundEngine.playTetra();
         } else {
           soundEngine.playLineClear();
         }

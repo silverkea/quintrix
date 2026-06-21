@@ -517,8 +517,8 @@ export default function App() {
 
 
         <div className="glass-panel glass-panel-cyan glass-panel rounded-2xl lg:rounded-3xl p-2 lg:p-6 relative flex flex-col items-center">
-          {/* Piece queue + hold */}
-          <div className="flex items-center justify-center gap-2 mb-1 w-full">
+          {/* Mobile piece queue + hold */}
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-1 w-full">
             {gameState.nextPieces.slice(0, 3).map((type, index) => (
               <div key={index} className="flex items-center gap-1">
                 <span className={`text-xs font-mono ${index === 0 ? 'text-neon-magenta font-bold' : 'text-white/40'}`}>

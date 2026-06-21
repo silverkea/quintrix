@@ -609,7 +609,11 @@ export default function App() {
               <div className={`w-6 h-8 ${index === 0 ? 'opacity-100' : 'opacity-40 text-xs flex items-center'}`}>
                 <span className="text-white/60">{index + 1}</span>
               </div>
-              <MiniPiecePreview type={type} size={index === 0 ? 'normal' : 'small'} />
+              {gameState.isPlaying ? (
+                <MiniPiecePreview type={type} size={index === 0 ? 'normal' : 'small'} />
+              ) : (
+                <div className="w-10 h-10 border-2 border-white/10 border-dashed rounded-lg" />
+              )}
             </div>
           ))}
 

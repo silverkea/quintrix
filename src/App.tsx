@@ -906,7 +906,7 @@ function MobileControls({
   disabled: boolean;
 }) {
   return (
-    <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 lg:hidden w-full max-w-sm px-2 z-40">
+    <div className="absolute bottom-12 sm:bottom-14 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 lg:hidden w-full max-w-sm px-2 z-40">
       <button
         onPointerDown={(e) => { e.preventDefault(); onLeft(); }}
         disabled={disabled}
